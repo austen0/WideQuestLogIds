@@ -1,0 +1,5 @@
+## Interface: 20504
+## Title: Wide Quest Log IDs
+## Author: austen
+## Notes: Adds quest log IDs on the shown quest.
+WideQuestLogIds.lua
