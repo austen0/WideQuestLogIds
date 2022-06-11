@@ -7,7 +7,7 @@ QuestLogFrame:HookScript('OnUpdate', function(self)
 		title = format("%s [%d]", title, id)
 	end
 	if ( IsCurrentQuestFailed() ) then
-		title = title.." - ("..TEXT(FAILED)..")";
+		title = format("%s - (%s)", title, _G.FAILED)
 	end
 	QuestLogQuestTitle:SetText(title);
 end)
