@@ -19,28 +19,28 @@ jobs:
       
       - name: Prepare zip directory
         run: |
-          mkdir "$GITHUB_WORKSPACE/WideQuestLogIds"
-          cp "$GITHUB_WORKSPACE/LICENSE" "$GITHUB_WORKSPACE/WideQuestLogIds/LICENSE"
-          cp "$GITHUB_WORKSPACE/WideQuestLogIds.lua" "$GITHUB_WORKSPACE/WideQuestLogIds/WideQuestLogIds.lua"
+          mkdir "${GITHUB_WORKSPACE}/WideQuestLogIds"
+          cp "${GITHUB_WORKSPACE}/LICENSE" "${GITHUB_WORKSPACE}/WideQuestLogIds/LICENSE"
+          cp "${GITHUB_WORKSPACE}/WideQuestLogIds.lua" "${GITHUB_WORKSPACE}/WideQuestLogIds/WideQuestLogIds.lua"
 
       - name: Package classic
         run: |
-          cp -f "$GITHUB_WORKSPACE/WideQuestLogIds-classic.toc" "$GITHUB_WORKSPACE/WideQuestLogIds/WideQuestLogIds.toc"
-          zip -r "$GITHUB_WORKSPACE/WideQuestLogIds-${REL_VER}-classic.zip" "$GITHUB_WORKSPACE/WideQuestLogIds"
+          cp -f "${GITHUB_WORKSPACE}/WideQuestLogIds-classic.toc" "${GITHUB_WORKSPACE}/WideQuestLogIds/WideQuestLogIds.toc"
+          zip -r "${GITHUB_WORKSPACE}/WideQuestLogIds-${REL_VER}-classic.zip" "${GITHUB_WORKSPACE}/WideQuestLogIds"
 
       - name: Package bcc
         run: |
-          cp -f "$GITHUB_WORKSPACE/WideQuestLogIds-bcc.toc" "$GITHUB_WORKSPACE/WideQuestLogIds/WideQuestLogIds.toc"
-          zip -r "$GITHUB_WORKSPACE/WideQuestLogIds-${REL_VER}-bcc.zip" "$GITHUB_WORKSPACE/WideQuestLogIds"
+          cp -f "${GITHUB_WORKSPACE}/WideQuestLogIds-bcc.toc" "${GITHUB_WORKSPACE}/WideQuestLogIds/WideQuestLogIds.toc"
+          zip -r "${GITHUB_WORKSPACE}/WideQuestLogIds-${REL_VER}-bcc.zip" "${GITHUB_WORKSPACE}/WideQuestLogIds"
           
       - name: Package wrath
         run: |
-          cp -f "$GITHUB_WORKSPACE/WideQuestLogIds-wrath.toc" "$GITHUB_WORKSPACE/WideQuestLogIds/WideQuestLogIds.toc"
-          zip -r "$GITHUB_WORKSPACE/WideQuestLogIds-${REL_VER}-wrath.zip" "$GITHUB_WORKSPACE/WideQuestLogIds"
+          cp -f "${GITHUB_WORKSPACE}/WideQuestLogIds-wrath.toc" "${GITHUB_WORKSPACE}/WideQuestLogIds/WideQuestLogIds.toc"
+          zip -r "${GITHUB_WORKSPACE}/WideQuestLogIds-${REL_VER}-wrath.zip" "${GITHUB_WORKSPACE}/WideQuestLogIds"
 
       - name: Create release draft
         run: |
-          gh release create $REL_VER --draft --title "$REL_VER"
+          gh release create $REL_VER --draft --title "$REL_VER" "${GITHUB_WORKSPACE}/WideQuestLogIds-${REL_VER}-*.zip"
           #gh release upload $REL_VER "$GITHUB_WORKSPACE/WideQuestLogIds-${REL_VER}-classic.zip"
           #gh release upload $REL_VER "$GITHUB_WORKSPACE/WideQuestLogIds-${REL_VER}-bcc.zip"
           #gh release upload $REL_VER "$GITHUB_WORKSPACE/WideQuestLogIds-${REL_VER}-wrath.zip"
