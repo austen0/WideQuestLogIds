@@ -18,7 +18,7 @@ jobs:
         run: |
           mkdir "$GITHUB_WORKSPACE/WideQuestLogIds"
           cp "$GITHUB_WORKSPACE/LICENSE" "$GITHUB_WORKSPACE/WideQuestLogIds/LICENSE"
-          cp "$GITHUB_WORKSPACE/WideQuestLogIds.lua" ""$GITHUB_WORKSPACE/WideQuestLogIds/WideQuestLogIds.lua"
+          cp "$GITHUB_WORKSPACE/WideQuestLogIds.lua" "$GITHUB_WORKSPACE/WideQuestLogIds/WideQuestLogIds.lua"
 
       # Runs a single command using the runners shell
       - name: Package classic.
