@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REL_VER: v${{ github.event.inputs.releaseVersion }}
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
@@ -25,21 +26,21 @@ jobs:
       - name: Package classic
         run: |
           cp -f "$GITHUB_WORKSPACE/WideQuestLogIds-classic.toc" "$GITHUB_WORKSPACE/WideQuestLogIds/WideQuestLogIds.toc"
-          zip -r "$GITHUB_WORKSPACE/WideQuestLogIds-v${{ github.event.inputs.releaseVersion }}-classic.zip" "$GITHUB_WORKSPACE/WideQuestLogIds"
+          zip -r "$GITHUB_WORKSPACE/WideQuestLogIds-${REL_VER}-classic.zip" "$GITHUB_WORKSPACE/WideQuestLogIds"
 
       - name: Package bcc
         run: |
           cp -f "$GITHUB_WORKSPACE/WideQuestLogIds-bcc.toc" "$GITHUB_WORKSPACE/WideQuestLogIds/WideQuestLogIds.toc"
-          zip -r "$GITHUB_WORKSPACE/WideQuestLogIds-v${{ github.event.inputs.releaseVersion }}-bcc.zip" "$GITHUB_WORKSPACE/WideQuestLogIds"
+          zip -r "$GITHUB_WORKSPACE/WideQuestLogIds-${REL_VER}-bcc.zip" "$GITHUB_WORKSPACE/WideQuestLogIds"
           
       - name: Package wrath
         run: |
           cp -f "$GITHUB_WORKSPACE/WideQuestLogIds-wrath.toc" "$GITHUB_WORKSPACE/WideQuestLogIds/WideQuestLogIds.toc"
-          zip -r "$GITHUB_WORKSPACE/WideQuestLogIds-v${{ github.event.inputs.releaseVersion }}-wrath.zip" "$GITHUB_WORKSPACE/WideQuestLogIds"
+          zip -r "$GITHUB_WORKSPACE/WideQuestLogIds-${REL_VER}-wrath.zip" "$GITHUB_WORKSPACE/WideQuestLogIds"
 
       - name: Create release draft
         run: |
-          gh release create "v${{ github.event.inputs.releaseVersion }}" --draft
-          gh release upload "v${{ github.event.inputs.releaseVersion }}" "$GITHUB_WORKSPACE/WideQuestLogIds-v${{ github.event.inputs.releaseVersion }}-classic.zip"
-          gh release upload "v${{ github.event.inputs.releaseVersion }}" "$GITHUB_WORKSPACE/WideQuestLogIds-v${{ github.event.inputs.releaseVersion }}-bcc.zip"
-          gh release upload "v${{ github.event.inputs.releaseVersion }}" "$GITHUB_WORKSPACE/WideQuestLogIds-v${{ github.event.inputs.releaseVersion }}-wrath.zip"
+          gh release create $REL_VER --draft
+          gh release upload $REL_VER "$GITHUB_WORKSPACE/WideQuestLogIds-${REL_VER}-classic.zip"
+          gh release upload $REL_VER "$GITHUB_WORKSPACE/WideQuestLogIds-${REL_VER}-bcc.zip"
+          gh release upload $REL_VER "$GITHUB_WORKSPACE/WideQuestLogIds-${REL_VER}-wrath.zip"
